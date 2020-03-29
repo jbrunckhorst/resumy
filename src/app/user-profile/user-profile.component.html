@@ -1,0 +1,98 @@
+<mat-sidenav-container autosize>
+    <mat-sidenav #sidenav mode="side" [opened]="screenWidth > 900">
+      <h2 class="title">User</h2>
+      <div class="list-menu">
+        <a mat-button (click)="activeTab = 'profile'">Profile</a>
+        <a mat-button (click)="activeTab = 'resumes'">Resumes</a>
+      </div>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+  
+      <div *ngIf="activeTab === 'profile'" class="scrollable-content">
+        <div>
+          <button class="profile-picture" (click)="onProfileClick()" matTooltip="Click to edit image"><img [src]="imageURL | async" style="width: 128px; height: 128px; border-radius: 100%;"></button>
+        </div>
+        <form class="profile-form" [formGroup]="info">
+            <mat-form-field>
+              <input matInput formControlName="name" placeholder="Full name" type="text" autocomplete="off">
+            </mat-form-field>
+            <div class="break"></div>
+            <mat-form-field>
+              <mat-label>Phone number</mat-label>
+              <input matInput formControlName="phone" type="tel" autocomplete="off">
+              <mat-icon matSuffix>phone</mat-icon>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" type="email" autocomplete="off">
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Address</mat-label>
+              <input matInput
+              formControlName="adress"
+              type="adress"
+              autocomplete="off"
+              matGoogleMapsAutocomplete
+              (onAutocompleteSelected)="onAutocompleteSelected($event)">
+              <mat-icon matSuffix>location_on</mat-icon>
+            </mat-form-field>
+            <div class="break"></div>
+            <div class="break"></div>
+            <div formArrayName="references" class="list">
+              <h2>References</h2>
+              <div *ngFor="let _ of references.controls; index as i" class="list-item">
+                <mat-form-field>
+                  <mat-label>URL</mat-label>
+                  <input matInput [formControl]="references.controls[i]" placeholder="e.g. LinkedIn, GitHub, Website, ..." type="url" autocomplete="off">
+                </mat-form-field>
+                <button type="button" mat-icon-button (click)="removeReference(i)"><mat-icon>cancel</mat-icon></button>
+              </div>
+              <button mat-icon-button (click)="addReference()"><mat-icon>add</mat-icon></button>
+            </div>
+            <div formArrayName="languages" class="list">
+              <h2>Languages</h2>
+              <div *ngFor="let _ of languages.controls; index as i" class="list-item">
+                <mat-form-field>
+                  <mat-label>Language</mat-label>
+                  <input matInput [formControl]="languages.controls[i]" placeholder="e.g. English (C1), ..." type="text" autocomplete="off">
+                </mat-form-field>
+                <button type="button" mat-icon-button (click)="removeLanguage(i)"><mat-icon>cancel</mat-icon></button>
+              </div>
+              <button mat-icon-button (click)="addLanguage()"><mat-icon>add</mat-icon></button>
+            </div>
+        </form>
+      </div>
+  
+      <div  *ngIf="activeTab === 'resumes'" class="scrollable-content">
+        <h2 *ngIf="resumes.length === 0" class="title">Click the button at the right bottom to create your first resume.</h2>
+        <mat-card *ngFor="let resume of resumes" style="display: flex;">
+          <div style="flex-grow: 1; cursor: pointer;" (click)="goToResume(resume)">
+            <mat-card-title>{{ resume }}</mat-card-title>
+          </div>
+          <div>
+            <button mat-icon-button (click)="onDeleteClick(resume)"><mat-icon>delete</mat-icon></button>
+          </div>
+        </mat-card>
+        <div class="overlay-button">
+          <button mat-fab matTooltip="Click to add a new resume" color="secondary" (click)="onAddClick()"><mat-icon>add</mat-icon></button>
+        </div>
+      </div>
+  
+      <div>
+        <button mat-icon-button class="toggle-button" *ngIf="!sidenav.opened" [matMenuTriggerFor]="mobileSidenav" aria-label="Sidenav menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #mobileSidenav="matMenu" overlapTrigger="false" xPosition="after">
+          <h2 class="title">User</h2>
+          <div class="list-menu">
+            <a mat-button (click)="activeTab = 'profile'">Profile</a>
+            <a mat-button (click)="activeTab = 'resumes'">Resumes</a>
+          </div>
+        </mat-menu>
+      </div>
+      
+    </mat-sidenav-content>
+</mat-sidenav-container>
+  

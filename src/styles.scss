@@ -1,1 +1,292 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import '~@angular/material/theming';
+@import '~firebaseui/dist/firebaseui.css';
+@include mat-core();
+
+
+$primary: #08334b;
+$primary-light: #3a5c77;
+$primary-dark: #000c23;
+
+$secondary: #006064;
+$secondary-light: #428e92;
+$secondary-dark: #00363a;
+
+$error: #B00020;
+$light: #f8f8f8;
+$link: $secondary;
+
+$mat-primary: (
+  50 : #e1e7e9,
+  100 : #b5c2c9,
+  200 : #8499a5,
+  300 : #527081,
+  400 : #2d5266,
+  500 : #08334b,
+  600 : #072e44,
+  700 : #06273b,
+  800 : #042033,
+  900 : #021423,
+  A100 : #5fa8ff,
+  A200 : #2c8cff,
+  A400 : #0071f8,
+  A700 : #0065df,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #ffffff,
+      400 : #ffffff,
+      500 : #ffffff,
+      600 : #ffffff,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #ffffff,
+      A200 : #ffffff,
+      A400 : #ffffff,
+      A700 : #ffffff,
+  )
+);
+$mat-secondary: (
+  50 : #e0ecec,
+  100 : #b3cfd1,
+  200 : #80b0b2,
+  300 : #4d9093,
+  400 : #26787b,
+  500 : #006064,
+  600 : #00585c,
+  700 : #004e52,
+  800 : #004448,
+  900 : #003336,
+  A100 : #6ef4ff,
+  A200 : #3bf0ff,
+  A400 : #08ecff,
+  A700 : #00dbed,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #ffffff,
+      400 : #ffffff,
+      500 : #ffffff,
+      600 : #ffffff,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
+  )
+);
+
+$app-primary: mat-palette($mat-primary);
+$app-accent:  mat-palette($mat-secondary);
+$app-theme: mat-light-theme($app-primary, $app-accent);
+@include angular-material-theme($app-theme);
+
+$roboto: 'Roboto', sans-serif;
+$montserrat: 'Montserrat';
+
+html, body {
+  margin: 0;
+  font-family: $roboto;
+  font-weight: 300;
+  color: rgba(0, 0, 0, 0.87);
+  height: 100%;
+  background: linear-gradient(to top right, $primary, $primary-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-print-color-adjust: exact !important;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.mat-sidenav-container {
+  box-shadow: -1px 8px 8px 0px rgba(0,0,0,0.2);
+  height: 80vh;
+  min-width: 80vw;
+  max-width: calc(100vw - 48px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background: #eee;
+  border-radius: 20px;
+
+  .mat-sidenav {
+    padding: 20px;
+    background: #eee;
+  }
+
+  .mat-sidenav-content {
+    background: $light;
+    padding: 0 20px;
+    .scrollable-content {
+      height: 100%;
+      display: flex;
+      flex-flow: wrap;
+      align-content: flex-start;
+      align-items: center;
+      justify-content: center;
+      overflow-y: scroll;
+      overflow-x: hidden;
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      .mat-card {
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        box-shadow: -1px 4px 4px 0px rgba(0,0,0,0.2);
+      
+        &:hover{
+          box-shadow: -1px 8px 8px 0px rgba(0,0,0,0.2);
+        }
+      }
+
+    }
+
+    .toggle-button {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+
+    .overlay-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+
+      button {
+        box-shadow: -1px 4px 4px 0px rgba(0,0,0,0.2);
+        border-radius: 50%;
+        margin-left: 10px;
+
+        &:hover{
+          box-shadow: -1px 8px 8px 0px rgba(0,0,0,0.2);
+        }
+      }
+    }
+  }
+}
+
+.mat-toolbar {
+  color: $light;
+  position: absolute;
+  background-color: transparent;
+
+  .toolbar-title {
+    font-weight: 500;
+    letter-spacing: 1.1px;
+  }
+
+  .toolbar-icon {
+    padding: 0 20px;
+  }
+
+  .toolbar-spacer {
+    flex: 1 1 auto;
+  }
+}
+
+.mat-secondary {
+  background-color: $secondary;
+  color: #fff;
+}
+
+button:focus {
+  outline: none;
+  border: 0;
+}
+
+.mat-button .mat-button-focus-overlay {
+  background-color: transparent;
+}
+
+.title {
+  color: $secondary;
+  font-weight: 500;
+  font-size: 21px;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+}
+
+.placeholder {
+  color: $secondary;
+  font-weight: 500;
+}
+
+.link {
+  color: $link;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+.list-menu {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  flex-grow: 1;
+  text-align: left;
+
+  > a {
+    text-align: left;
+    margin: 5px 0px;
+    color: inherit;
+    text-decoration: none !important;
+
+    :hover {
+      color: rgba(0, 0, 0, 0.87);;
+    }
+  }
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+/*Firebase Custom Theme Stuff*/
+.mdl-button.mdl-button--colored{color:$secondary}
+.mdl-button--raised.mdl-button--colored{background: $secondary;color:#fff}
+.mdl-button--raised.mdl-button--colored:hover{background-color: $secondary}
+.mdl-button--raised.mdl-button--colored:active{background-color: $secondary}
+.mdl-button--raised.mdl-button--colored:focus:not(:active){background-color: $secondary}
+.mdl-button--primary.mdl-button--primary{color: $secondary}
+.mdl-button--primary.mdl-button--primary.mdl-button--fab,.mdl-button--primary.mdl-button--primary.mdl-button--raised{background-color: $secondary}
+.mdl-progress>.progressbar{background-color: $secondary}
+.mdl-progress>.bufferbar{
+  background-image:linear-gradient(to right,rgba(255,255,255,.7),rgba(255,255,255,.7)), linear-gradient(to right,$secondary,$secondary);z-index:0;left:0
+}
+.mdl-progress:not(.mdl-progress--indeterminate)>.auxbar,.mdl-progress:not(.mdl-progress__indeterminate)>.auxbar{
+  background-image:linear-gradient(to right,rgba(255,255,255,.9),rgba(255,255,255,.9)),linear-gradient(to right,$secondary,$secondary)}
+.mdl-progress.mdl-progress--indeterminate>.bar1,.mdl-progress.mdl-progress__indeterminate>.bar1{background-color:$secondary}
+.mdl-progress.mdl-progress--indeterminate>.bar3,.mdl-progress.mdl-progress__indeterminate>.bar3{background-color:$secondary}
+.mdl-spinner__layer-1{border-color:$secondary-light}
+.mdl-spinner--single-color .mdl-spinner__layer-1{border-color:$secondary}
+.mdl-spinner__layer-2{border-color:$secondary}
+.mdl-spinner--single-color .mdl-spinner__layer-3{border-color:$secondary}
+.mdl-spinner--single-color .mdl-spinner__layer-4{border-color:$secondary}
+.mdl-textfield--floating-label.has-placeholder .mdl-textfield__label,.mdl-textfield--floating-label.is-dirty .mdl-textfield__label,.mdl-textfield--floating-label.is-focused .mdl-textfield__label{color:$secondary}
+.mdl-textfield__label:after{background-color:$secondary}
+.firebaseui-textfield.mdl-textfield .firebaseui-label::after{background-color:$secondary}
+.firebaseui-link{color:$link}

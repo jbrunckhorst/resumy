@@ -1,0 +1,74 @@
+@import "../../styles.scss";
+
+.mat-card {
+
+  &:hover{
+    .mat-icon {
+      display: inline;
+    }
+  }
+}
+
+a {
+  width: 100%;
+  color: inherit;
+  text-decoration: none !important;
+
+  :hover {
+    color: black;
+  }
+}
+
+.profile-picture {
+  border-radius: 100%;
+  background-color: $light;
+  border-color: transparent;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  img {
+    box-shadow: -1px 4px 4px 0px rgba(0,0,0,0.2);
+    width: 128px;
+    height: 128px;
+    border-radius: 100%;
+  }
+}
+
+.profile-form {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  .break {
+    flex-basis: 100%;
+    height: 10px;
+  }
+
+  .mat-form-field {
+    flex-basis: 25%;
+
+    input {
+      text-align: center;
+    }
+  }
+
+  .list {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .list-item {
+      width: 100%;
+    }
+
+    .mat-form-field {
+      width: 50%;
+    }
+  }
+
+  .button {
+    align-self: flex-start;
+  }
+}

@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>Edit Photo</h2>
+<div mat-dialog-content>
+    <div *ngIf="!imageChangedEvent" style="width: 256px;">
+      <image-cropper
+        [imageBase64]="initialImage"
+        [resizeToWidth]="256"
+        [cropperMinWidth]="64"
+        [roundCropper]=true
+        [alignImage]="'center'"
+        [hideResizeSquares]=true
+        [transform]="transform"
+        [onlyScaleDown]="true"
+        (imageCropped)="imageCropped($event)"
+        (imageLoaded)="imageLoaded()"
+        (cropperReady)="cropperReady($event)"
+        (loadImageFailed)="loadImageFailed()"
+      ></image-cropper>
+      <mat-slider (input)="zoom($event)" min="1.0" max="4" step="0.01" value="1.0" style="width: 256px;"></mat-slider>
+    </div>
+    <div *ngIf="imageChangedEvent" style="width: 256px;">
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [resizeToWidth]="256"
+          [cropperMinWidth]="64"
+          [roundCropper]=true
+          [alignImage]="'center'"
+          [hideResizeSquares]=true
+          [transform]="transform"
+          [onlyScaleDown]="true"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady($event)"
+          (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
+        <mat-slider (input)="zoom($event)" min="1.0" max="4" step="0.01" value="1.0" style="width: 256px;"></mat-slider>
+    </div>
+    <input type="file" #imageUpload style="display:none;" (change)="uploadFile($event)" />
+    <button mat-flat-button color="primary" style="width: 100%;" (click)="imageUpload.click()">Upload new photo</button>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="onSaveClick()">Save</button>
+</div>

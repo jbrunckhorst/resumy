@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>Edit Experiences</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field style="width: 100%;">
+      <mat-label>Title</mat-label>
+      <input matInput cdkFocusInitial placeholder="e.g. job title, project title, university degree, ..." type="text" autocomplete="off" formControlName="title">
+    </mat-form-field>
+    <mat-form-field style="width: 100%;">
+      <mat-label>Subtitle (optional)</mat-label>
+      <input matInput cdkFocusInitial placeholder="e.g. name of company, university, ..." type="text" autocomplete="off" formControlName="subtitle">
+    </mat-form-field>
+    <mat-form-field style="margin-right: 15px;">
+      <input matInput [matDatepicker]="dp" (focus)="dp.open()" placeholder="Start Date" autocomplete="off" formControlName="startDate">
+      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+      <mat-datepicker #dp
+                      startView="multi-year"
+                      (yearSelected)="chosenYearHandler($event, 'start')"
+                      (monthSelected)="chosenMonthHandler($event, dp, 'start')"
+                      panelClass="example-month-picker">
+      </mat-datepicker>
+    </mat-form-field>
+    <mat-form-field *ngIf="!form.get('today').value">
+      <input matInput [matDatepicker]="dp2" (focus)="dp2.open()" placeholder="End Date" autocomplete="off" formControlName="endDate">
+      <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+      <mat-datepicker #dp2
+                      startView="multi-year"
+                      (yearSelected)="chosenYearHandler($event, 'end')"
+                      (monthSelected)="chosenMonthHandler($event, dp2, 'end')"
+                      panelClass="example-month-picker">
+      </mat-datepicker>
+    </mat-form-field>
+    <mat-checkbox style="margin-left: 15px;" color="primary" formControlName="today">Until today</mat-checkbox>
+    <mat-form-field style="width: 100%;">
+      <mat-label>Description</mat-label>
+      <textarea matInput appBulletBox matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=7 [(form)]="form" formControlName="description"></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="onSaveClick()" [disabled]="form.invalid">Save</button>
+</div>

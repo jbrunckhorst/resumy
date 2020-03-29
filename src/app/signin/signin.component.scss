@@ -1,0 +1,16 @@
+@import "../../styles.scss";
+
+.login-box {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: white;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background: #eee;
+  border-radius: 20px;
+}
