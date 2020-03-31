@@ -2,7 +2,7 @@
 
 Angular app (see [Demo Page](https://resumy-e89ac.web.app/)) that lets you create a resume like this, 
 
-![Example Resume](resumy.jpg)
+[![Example Resume](resumy.jpg)](https://github.com/neuencer/resumy/blob/master/resumy.pdf)
 
 
 ## Development server
