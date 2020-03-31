@@ -1,6 +1,9 @@
-# ResumyFirebase
+# Angular Resume Creator App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.6.
+Angular app (see [Demo Page](https://resumy-e89ac.web.app/)) that lets you create a resume like this, 
+
+![Example Resume](resumy.jpg)
+
 
 ## Development server
 
